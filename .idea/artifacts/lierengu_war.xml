@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lierengu:war">
+    <output-path>$PROJECT_DIR$/lierengu/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>lierengu</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="lierengu.war">
+      <element id="artifact" artifact-name="lierengu:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,17 @@
+POST http://localhost:8080/lierengu/workbench/employee.do
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+###
+POST http://localhost:8080/lierengu/workbench/employee.do
+Content-Type: application/json
+
+{
+  "empId": 123,
+  "empName": "张三",
+  "gender": "男",
+  "identity": 232134111
+}
+
+###

@@ -1,0 +1,140 @@
+<div>
+        <table class="table table-hover" border="1" cellspacing="0" cellpadding="4" width="400">
+            <tr>
+                <td><input type="checkbox"/></td>
+                <th>员工id</th>
+                <th>员工姓名</th>
+                <th>员工性别</th>
+                <th>身份证号</th>
+                <th>学历</th>
+                <th>是否在职</th>
+                <th>部门或组</th>
+                <th>职务/工种</th>
+                <th>入职日期</th>
+                <th>离职日期</th>
+                <th>联系电话</th>
+                <th>邮箱地址</th>
+                <th>照片id</th>
+                <th>群组id</th>
+                <th>联系地址</th>
+                <th>毕业院校</th>
+                <th>专业</th>
+                <th>出生日期</th>
+                <th>年龄</th>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+
+            $(function () {
+
+                $(window).keydown(function (e) {
+                    if (e.keyCode == 13) {
+                        $("#saveEmployeeBtn").click();
+                    }
+                });
+
+                $("#addEmployeeBtn").click(function () {
+                    $("#addEmployeeForm").get(0).reset();
+                    $("#addEmployeeModal").modal("show");
+                });
+
+                $("#saveEmployeeBtn").click(function () {
+                    var empId = $.trim($("#add-empId").val());
+                    var empName = $.trim($("#add-empName").val());
+                    var gender = $.trim($("#add-gender").val());
+                    var identity = $.trim($("#add-identity").val);
+                    var degree = $.trim($("#add-degree").val);
+                    var working = $.trim($("#add-working").val);
+                    var department = $.trim($("#add-department").val);
+                    var job = $.trim($("#add-job").val);
+                    var onboarding = $.trim($("#add-onboarding").val);
+                    var dimission = $.trim($("#add-dimission").val);
+                    var phone = $.trim($("#add-phone").val);
+                    var email = $.trim($("#add-email").val);
+                    var photoId = $.trim($("#add-photoId").val);
+                    var groupId = $.trim($("#add-groupId").val);
+                    var address = $.trim($("#add-address").val);
+                    var school = $.trim($("#add-school").val);
+                    var profession = $.trim($("#add-profession").val);
+                    var birth = $.trim($("#add-birth").val);
+                    var age = $.trim($("#add-age").val);
+
+                    if(empId==""){
+                        alert("员工id不能为空");
+                        return;
+                    }
+                    if(empName==""){
+                        alert("员工姓名不能为空");
+                        return;
+                    }
+                    if(gender==""){
+                        alert("员工性别不能为空");
+                        return;
+                    }
+                    if(identity==""){
+                        alert("身份证号不能为空");
+                        return;
+                    }
+                    if((onboarding!="" && dimission!="") && onboarding>dimission){
+                        alert("入职日期不能在离职日期之后");
+                        return;
+                    }
+
+                    $.ajax({
+                        url:"workbench/saveEmployee.do",
+                        data:{
+                            "id":null,
+                            "empId":empId,
+                            "empName":empName,
+                            "gender":gender,
+                            "identity":identity,
+                            "degree":degree,
+                            "working":working,
+                            "department":department,
+                            "job":job,
+                            "onboarding":onboarding,
+                            "dimission":dimission,
+                            "phone":phone,
+                            "email":email,
+                            "photoId":photoId,
+                            "groupId":groupId,
+                            "address":address,
+                            "school":school,
+                            "profession":profession,
+                            "birth":birth,
+                            "age":age
+                        },
+                        type:"post",
+                        dataType:"json",
+                        success:function (data) {
+                            if (data.code == "1"){
+                                $("#addEmployeeModal").modal("hide");
+                            }else {
+                                alert(data.message);
+                                $("#addEmployeeModal").modal("show")
+                            }
+                        }
+                    });
+                });
+
+                $(".theDate").datetimepicker({
+                    language:"zh-CN",
+                    format:"yyyy-mm-dd",
+                    minView:"month",
+                    initialDate:new Date(),
+                    autoclose:true,
+                    todayBtn:true,
+                    clearBtn:true
+                })
+
+            });
+
+        </script>
